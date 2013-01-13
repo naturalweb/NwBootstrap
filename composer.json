@@ -13,12 +13,11 @@
             "email": "renato@naturalweb.com.br"
         }
     ],
+    
     "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@192.168.0.10:NwBase.git"
-        }
+        {"type": "vcs", "url": "/home/renato/repositorios/opensource/naturalweb/NwBase/.git"}
     ],
+    
     "require": {
         "php": ">=5.3.3",
         "naturalweb/base": "dev-master"
