@@ -1,12 +1,35 @@
 <?php
-
+/**
+ * Natural Web Ltda. (http://www.naturalweb.com.br)
+ * 
+ * @copyright  Copyright (c) Natural Web Ltda. (http://www.naturalweb.com.br)
+ * @license    BSD-3-Clause
+ * @package    NwBootstrap\View
+ * @subpackage Helper
+ */
 namespace NwBootstrap\View\Helper;
 
 use NwBootstrap\Bootstrap;
 use Zend\View\Helper\AbstractHtmlElement;
 
+/**
+ * Cria um alert html com o padrão do bootstrap twitter
+ * 
+ * @category   NwBootstrap
+ * @package    NwBootstrap\View
+ * @subpackage Helper
+ * @author     Renato Moura <renato@naturalweb.com.br>
+ * @see        http://twitter.github.com/bootstrap/components.html#alerts
+ */
 class Alert extends AbstractHtmlElement
 {
+    /**
+     * Valida se o tipo solicitado é valido
+     * 
+     * @param string $status Status do Alert
+     * 
+     * @return boolean
+     */
     protected function hasAlert($status)
     {
         $listStatus = array(
@@ -20,6 +43,16 @@ class Alert extends AbstractHtmlElement
         return in_array($status, $listStatus);
     }
     
+    /**
+     * Metodo que é invocado na view
+     * 
+     * @param string $message       Mensagem do Alert
+     * @param string $statusDefault Tipo do Alert
+     * @param string $title         Titulo
+     * @param bool   $close         Botão close ?
+     * 
+     * @return string
+     */
     public function __invoke($message, $statusDefault = Bootstrap::ALERT_INFO, $title = null, $close = true)
     {
         $alerts = array();

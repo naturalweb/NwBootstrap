@@ -1,15 +1,24 @@
 <?php
-
+/**
+ * Natural Web Ltda. (http://www.naturalweb.com.br)
+ * 
+ * @copyright  Copyright (c) Natural Web Ltda. (http://www.naturalweb.com.br)
+ * @license    BSD-3-Clause
+ * @package    NwBootstrap\View
+ * @subpackage Helper
+ */
 namespace NwBootstrap\View\Helper;
 
 use Zend\View\Helper\AbstractHtmlElement;
 
 /**
- * Monta a Page header
- *
- * @package MY_View_Helper_Navigation_PageHeader
- * @author  Renato Moura <renato@naturalweb.com.br>
- * @since   1.0
+ * Cria o html do component PageHeader bootstrap twitter
+ * 
+ * @category   NwBootstrap
+ * @package    NwBootstrap\View
+ * @subpackage Helper
+ * @author     Renato Moura <renato@naturalweb.com.br>
+ * @see        http://twitter.github.com/bootstrap/components.html#typography
  */
 class PageHeader extends AbstractHtmlElement
 {
@@ -27,15 +36,17 @@ class PageHeader extends AbstractHtmlElement
         $return = '';
         
         $return .= '<div class="page-header">';
-        $return .= '<h2> '.$this->view->escapeHtml($titulo);
+        $return .= '<h2>'.$this->view->escapeHtml($titulo);
         
-        if( $sub_titulo )
-        $return .= ' <small>'.$this->view->escapeHtml($sub_titulo).'</small> ';
+        if ($sub_titulo) {
+            $return .= ' <small>'.$this->view->escapeHtml($sub_titulo).'</small>';
+        }
         
-        if( $extra )
-        $return .= $extra;
+        if ($extra) {
+            $return .= $extra;
+        }
         
-        $return .= ' </h2>';
+        $return .= '</h2>';
         $return .= '</div>';
         
         return $return;

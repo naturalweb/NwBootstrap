@@ -2,12 +2,12 @@
 
 namespace NwBootstrapTest\View\Helper;
 
-use NwBase\Test\AbstractTestCase;
 use NwBootstrap\View\Helper\Alert;
 use NwBootstrap\Bootstrap;
 use Zend\View\Renderer\PhpRenderer as View;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
 
-class AlertTest extends AbstractTestCase
+class AlertTest extends TestCase
 {
 	protected $alert;
 
@@ -20,6 +20,10 @@ class AlertTest extends AbstractTestCase
 		$this->assertTrue(
 			class_exists($class = 'NwBootstrap\View\Helper\Alert'),
 			"Classe NwBootstrap\View\Helper\Alert not found " . $class
+		);
+		
+		$this->setApplicationConfig(
+		    include __DIR__ . '/../../../_files/config/application.config.php'
 		);
 	}
 	
@@ -44,9 +48,10 @@ class AlertTest extends AbstractTestCase
 		    array('status' => '222', 'message' => 'Alguma mensagem de aviso!'),
 		);
 		$html = $this->alert->__invoke($listMessage);
+		$this->getApplication()->getResponse()->setContent($html);
 		
-		$this->assertQueryCount($html, 'div.alert-info li', 2,'Erro, número retornado não corresponde!');
-		$this->assertQuery($html, 'div.alert-info button.close', 'Button de CLose não encontrado');
+		$this->assertQueryCount('div.alert-info li', 2,'Erro, número retornado não corresponde!');
+		$this->assertQuery('div.alert-info button.close', 'Button de CLose não encontrado');
 	}
 	
 	public function testAlertListSomenteString()
@@ -58,9 +63,10 @@ class AlertTest extends AbstractTestCase
 	        'Outro Aviso',
 	    );
 	    $html = $this->alert->__invoke($listMessage, Bootstrap::ALERT_SUCCESS, $title);
+	    $this->getApplication()->getResponse()->setContent($html);
 	    
-	    $this->assertQueryCount($html, 'div.alert-success li', 2,'Erro, número retornado não corresponde!');
-	    $this->assertQueryContentContains($html, 'div.alert-success h4', $title, "Title nao encontrado");
+	    $this->assertQueryCount('div.alert-success li', 2,'Erro, número retornado não corresponde!');
+	    $this->assertQueryContentContains('div.alert-success h4', $title, "Title nao encontrado");
 	}
 	
 	public function testAlertUnicaMensagem()
@@ -68,9 +74,10 @@ class AlertTest extends AbstractTestCase
 		$alert = $this->alert;
 		$message = "mensagem de perigo";
 		$html = $this->alert->__invoke($message, Bootstrap::ALERT_WARNING, '', false);
+		$this->getApplication()->getResponse()->setContent($html);
 		
-		$this->assertQueryContentContains($html, 'div.alert-block p', $message, "Texto de mensagem não encontrado no alert");
-		$this->assertNotQuery($html, 'div.alert-block h4', 'Não Deveria aparecer nenhum Title');
-		$this->assertNotQuery($html, 'div.alert-block button.close', 'Não Deveria aparecer o Button de close');
+		$this->assertQueryContentContains('div.alert-block p', $message, "Texto de mensagem não encontrado no alert");
+		$this->assertNotQuery('div.alert-block h4', 'Não Deveria aparecer nenhum Title');
+		$this->assertNotQuery('div.alert-block button.close', 'Não Deveria aparecer o Button de close');
 	}
 }

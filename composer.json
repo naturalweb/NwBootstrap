@@ -6,25 +6,19 @@
         "zf2", "zend", "framework", "naturalweb", "twitter", "bootstrap"
     ],
     "license": "BSD-3-Clause",
-    "version": "0.0.1",
+    "homepage": "https://github.com/naturalweb/NwBootstrap",
     "authors": [
         {
             "name": "Renato Moura",
             "email": "renato@naturalweb.com.br"
         }
     ],
-    
-    "repositories": [
-        {"type": "vcs", "url": "/home/renato/repositorios/opensource/naturalweb/NwBase/.git"}
-    ],
-    
     "require": {
         "php": ">=5.3.3",
-        "naturalweb/base": "dev-master"
+        "zendframework/zendframework": "2.1.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*",
-        "squizlabs/php_codesniffer": "1.4.*"
+        "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
         "psr-0": {
