@@ -10,4 +10,10 @@ return array(
             'bootstrapPageHeader' => 'NwBootstrap\View\Helper\PageHeader',
         ),
     ),
+    
+    'controller_plugins' => array(
+        'invokables' => array(
+            'alertMessenger' => 'NwBootstrap\Controller\Plugin\AlertMessenger',
+        ),
+    ),
 );
