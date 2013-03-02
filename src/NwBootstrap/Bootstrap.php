@@ -3,18 +3,7 @@
 namespace NwBootstrap;
 
 class Bootstrap
-{
-    /**
-     * Constante
-     * - Definições de Alerts
-     * @see \NwBootstrap\View\Helper\Alert
-     */
-    const ALERT_ERROR   = 'error';
-    const ALERT_SUCCESS = 'success';
-    const ALERT_BLOCK   = 'block';
-    const ALERT_WARNING = 'block';
-    const ALERT_INFO    = 'info';
-    
+{    
     /**
      * - Definições de Buttons
      */
