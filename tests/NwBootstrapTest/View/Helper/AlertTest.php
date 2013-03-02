@@ -3,7 +3,7 @@
 namespace NwBootstrapTest\View\Helper;
 
 use NwBootstrap\View\Helper\Alert;
-use NwBootstrap\Bootstrap;
+use NwBootstrap\Alert\Alert as AlertStatus;
 use Zend\View\Renderer\PhpRenderer as View;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
 
@@ -27,57 +27,49 @@ class AlertTest extends TestCase
 		);
 	}
 	
-	public function testAlertStringVazia()
+	public function testAlertEmpty()
 	{
 		$html = $this->alert->__invoke('');
+		$this->assertEmpty($html, "Erro ao assertar que o retorno foi vazio!" );
 		
-		$this->assertEmpty($html, "Erro ao assertar que o retorno foi vazio!" );
-	}
-	
-	public function testAlertArrayVazio()
-	{
 		$html = $this->alert->__invoke(array());
-		        
 		$this->assertEmpty($html, "Erro ao assertar que o retorno foi vazio!" );
 	}
 	
-	public function testAlertListComStatus()
+	public function testAlertWithMessagesInArray()
 	{
 		$listMessage = array(
-			array('status' => '222', 'message' => 'Alguma mensagem de erro!'),
-		    array('status' => '222', 'message' => 'Alguma mensagem de aviso!'),
+			array('Alguma mensagem de erro!'),
+		    array('Alguma mensagem de aviso!'),
 		);
 		$html = $this->alert->__invoke($listMessage);
 		$this->getApplication()->getResponse()->setContent($html);
 		
-		$this->assertQueryCount('div.alert-info li', 2,'Erro, número retornado não corresponde!');
-		$this->assertQuery('div.alert-info button.close', 'Button de CLose não encontrado');
+		$this->assertQueryCount('div.alert-info', 2, 'Deveria exibir dois alert');
+		$this->assertQueryCount('div.alert-info button.close', 2, 'Button de Close não encontrado');
 	}
 	
-	public function testAlertListSomenteString()
+	public function testAlertWithTitleNotClose()
 	{
 	    $title = "Titulo do Alert";
+	    $message = 'Alguma mensagem';
 	    
-	    $listMessage = array(
-            'Alguma mensagem',
-	        'Outro Aviso',
-	    );
-	    $html = $this->alert->__invoke($listMessage, Bootstrap::ALERT_SUCCESS, $title);
+	    $html = $this->alert->__invoke($message, $title, false);
 	    $this->getApplication()->getResponse()->setContent($html);
 	    
-	    $this->assertQueryCount('div.alert-success li', 2,'Erro, número retornado não corresponde!');
-	    $this->assertQueryContentContains('div.alert-success h4', $title, "Title nao encontrado");
+	    $this->assertQuery('div.alert-info');
+	    $this->assertQueryContentContains('div.alert-info h4', $title);
+	    $this->assertNotQuery('div.alert-info button.close');
 	}
 	
-	public function testAlertUnicaMensagem()
+	public function testAlertWithObjectsAlert()
 	{
-		$alert = $this->alert;
-		$message = "mensagem de perigo";
-		$html = $this->alert->__invoke($message, Bootstrap::ALERT_WARNING, '', false);
-		$this->getApplication()->getResponse()->setContent($html);
-		
-		$this->assertQueryContentContains('div.alert-block p', $message, "Texto de mensagem não encontrado no alert");
-		$this->assertNotQuery('div.alert-block h4', 'Não Deveria aparecer nenhum Title');
-		$this->assertNotQuery('div.alert-block button.close', 'Não Deveria aparecer o Button de close');
+	    $msg = 'Alguma mensagem';
+	    $message = new AlertStatus($msg, AlertStatus::ALERT_SUCCESS);
+	    
+	    $html = $this->alert->__invoke($message);
+	    $this->getApplication()->getResponse()->setContent($html);
+	    
+	    $this->assertQueryContentContains('div.alert-success p', $msg);
 	}
 }
