@@ -8,6 +8,8 @@ return array(
             'bootstrapNavbar'     => 'NwBootstrap\Navigation\View\Helper\Navbar',
             'bootstrapAlert'      => 'NwBootstrap\View\Helper\Alert',
             'bootstrapPageHeader' => 'NwBootstrap\View\Helper\PageHeader',
+        	'bootstrapBadges' 	  => 'NwBootstrap\View\Helper\Badges',
+        	'bootstrapLabels' 	  => 'NwBootstrap\View\Helper\Labels',
         ),
     ),
     
