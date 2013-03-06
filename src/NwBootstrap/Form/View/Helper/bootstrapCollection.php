@@ -83,13 +83,16 @@ class BootstrapCollection extends AbstractHelper
         $markup .= $this->getTemplateMarkup($element, $formStyle);
 
         $attribs .= ' ' . $this->createAttributesString($element->getAttributes()) . ' ';
-
-        $markup = sprintf(
-            $this->templates[$formStyle],
-            $attribs,
-            $markup
-        );
-
+        
+        $attribs = trim($attribs);
+        if (!empty($attribs)) {
+            $markup = sprintf(
+                $this->templates[$formStyle],
+                $attribs,
+                $markup
+            );
+        }
+        
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
         // Every collection is wrapped by a fieldset if needed
         if ($this->shouldWrap) {
