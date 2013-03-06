@@ -7,7 +7,7 @@ use Zend\Form\FieldsetInterface;
 
 class BootstrapForm extends AbstractHelper
 {
-    public function __invoke(FormInterface $form, $style = 'vertical')
+    public function __invoke(FormInterface $form = null, $style = 'vertical')
     { 
         if (!$form) {
             return $this;
