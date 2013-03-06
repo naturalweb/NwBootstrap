@@ -26,11 +26,15 @@ class BootstrapForm extends AbstractHelper
      */
     public function render(FormInterface $form, $style = 'vertical')
     {
+        if (method_exists($form, 'prepare')) {
+            $form->prepare();
+        }
+        
         $output = '';
         
         $output .= $this->openTag($form, $style);
         
-        foreach ($form => $element) {
+        foreach ($form as $element) {
             if ($element instanceof FieldsetInterface) {
                 $output .= $this->view->bootstrapCollection($element, $style);
             } else {
@@ -54,7 +58,6 @@ class BootstrapForm extends AbstractHelper
         if ($style) {
             $form->setAttribute('class', $form->getAttribute('class') . ' form-' . $style);
         }
-        $form->prepare();
         
         return $this->view->form()->openTag($form);
     }
