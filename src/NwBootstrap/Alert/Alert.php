@@ -46,7 +46,7 @@ class Alert
     public function setStatus($status)
     {
         if (!$this->hasStatus($status) ) {
-            $status = self::ALERT_INFO;
+            $status = self::ALERT_DEFAULT;
         }
         
         $this->status = $status;
