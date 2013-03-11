@@ -33,6 +33,20 @@ class AlertMessenger extends AbstractPlugin implements Countable
     }
     
     /**
+     * Add a message with "warning" type
+     *
+     * @param  string         $message
+     * @return FlashMessenger
+     */
+    public function addWarningMessage($message)
+    {
+        $message = new Alert($message, Alert::ALERT_WARNING);
+        $this->fm->addMessage($message);
+    
+        return $this;
+    }
+    
+    /**
      * Add a message with "info" type
      *
      * @param  string         $message
