@@ -45,8 +45,8 @@ class AlertTest extends TestCase
 		$html = $this->alert->__invoke($listMessage);
 		$this->getApplication()->getResponse()->setContent($html);
 		
-		$this->assertQueryCount('div.alert-info', 2, 'Deveria exibir dois alert');
-		$this->assertQueryCount('div.alert-info button.close', 2, 'Button de Close não encontrado');
+		$this->assertQueryCount('div.alert', 2, 'Deveria exibir dois alert');
+		$this->assertQueryCount('div.alert button.close', 2, 'Button de Close não encontrado');
 	}
 	
 	public function testAlertWithTitleNotClose()
@@ -57,9 +57,9 @@ class AlertTest extends TestCase
 	    $html = $this->alert->__invoke($message, $title, false);
 	    $this->getApplication()->getResponse()->setContent($html);
 	    
-	    $this->assertQuery('div.alert-info');
-	    $this->assertQueryContentContains('div.alert-info h4', $title);
-	    $this->assertNotQuery('div.alert-info button.close');
+	    $this->assertQuery('div.alert');
+	    $this->assertQueryContentContains('div.alert h4', $title);
+	    $this->assertNotQuery('div.alert button.close');
 	}
 	
 	public function testAlertWithObjectsAlert()
