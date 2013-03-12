@@ -235,6 +235,11 @@ class Navbar extends AbstractHelper
         }
         
         $html = '<' . $element . $this->htmlAttribs($attribs) . '>';
+        
+        if ($page->icon) {
+            $html .= '<i class="icon icon-' . $page->icon . '"></i> ';
+        }
+        
         if ($escapeLabel === true) {
             $escaper = $this->view->plugin('escapeHtml');
             $html .= $escaper($label);
@@ -350,6 +355,11 @@ class Navbar extends AbstractHelper
             if (!$this->accept($subPage)) {
                 continue;
             }
+            
+            if ($subPage->divider === true) {
+                $html .= '<li class="divider"></li> ';
+            }
+            
             $liClass = $subPage->isActive(true) ? ' class="active"' : '';
             $html .= $indent . '    <li' . $liClass . '>' . self::EOL;
             $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels) . self::EOL;
@@ -397,7 +407,9 @@ class Navbar extends AbstractHelper
         if (is_int($maxDepth)) {
             $iterator->setMaxDepth($maxDepth);
         }
-
+        
+        $displayDivider = true;
+        
         // iterate container
         $prevDepth = -1;
         foreach ($iterator as $page) {
@@ -441,6 +453,7 @@ class Navbar extends AbstractHelper
                     $ulClass = ' class="dropdown-menu"';
                 }
                 $html .= $myIndent . '<ul' . $ulClass . '>' . self::EOL;
+                $displayDivider = false;
             } elseif ($prevDepth > $depth) {
                 // close li/ul tags until we're at current depth
                 for ($i = $prevDepth; $i > $depth; $i--) {
@@ -459,6 +472,16 @@ class Navbar extends AbstractHelper
             $liClass = $page->hasChildren() ? ' dropdown' : '';
             $liClass .= $isActive ? ' active' : '';
             $liClass = (strlen($liClass)) ? ' class="' . $liClass . '" ' : '';
+            
+            if ($displayDivider===true && $page->divider===true) {
+                $divider = ($depth == 0) ? '-vertical' : '';
+                $html .= '<li class="divider'.$divider.'"></li> ';
+            }
+            $displayDivider = true;
+            
+            if ($page->nav_header) {
+                $html .= '<li class="nav-header">'.$page->nav_header.'</li> ';
+            }
             
             $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
                    . $myIndent . '        ' . $this->htmlify($page, $escapeLabels) . self::EOL;
