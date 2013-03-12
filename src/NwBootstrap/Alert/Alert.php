@@ -9,7 +9,6 @@ class Alert
     const ALERT_DEFAULT = 'alert';
     const ALERT_ERROR   = 'alert-error';
     const ALERT_SUCCESS = 'alert-success';
-    const ALERT_BLOCK   = 'alert-block';
     const ALERT_WARNING = 'alert-block';
     const ALERT_INFO    = 'alert-info';
     
@@ -31,10 +30,11 @@ class Alert
         
         if (empty($message) || (!is_array($message) && !is_string($message))) {
             $message = null;
+        } else {
+            $message = array_map('strval', (array) $message);
+            $message = array_filter($message);
         }
         
-        $message = array_map('strval', (array) $message);
-        $message = array_filter($message);
         $this->message = $message;
     }
     
@@ -95,7 +95,6 @@ class Alert
             self::ALERT_ERROR,
             self::ALERT_INFO,
             self::ALERT_SUCCESS,
-            self::ALERT_BLOCK,
             self::ALERT_WARNING,
         );
     
