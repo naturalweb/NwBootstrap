@@ -30,8 +30,11 @@ class Alert
         
         if (empty($message) || (!is_array($message) && !is_string($message))) {
             $message = null;
-        } else {
+        } elseif(!is_array($message)) {
             $message = array_map('strval', (array) $message);
+        }
+        
+        if (is_array($message)) {
             $message = array_filter($message);
         }
         
@@ -76,10 +79,34 @@ class Alert
             $html .= '<h4>' . $title . '</h4>';
         }
         
-        $html .= '<p>' . implode('<br />', $message) . '</p>';
+        $html .= '<p>' . $this->implodeMessages('<br />', $message) . '</p>';
         $html .= '</div>';
         
         return $html;
+    }
+    
+    protected function implodeMessages($glue, $message)
+    {
+        $return = array();
+        
+        foreach ($message as $msg)
+        {
+            if (is_array($msg) || $msg instanceof Traversable) {
+                $msg = $this->implodeMessages($glue, $msg);
+                
+            } elseif (is_object($msg) && method_exists($msg, '__toString')) {
+                $msg = (string) $msg;
+                
+            } elseif(!is_string($msg)) {
+                $msg = 'NULL';
+            }
+            
+            if (!empty($msg)) {
+                $return[] = $msg;
+            }
+        }
+        
+        return implode($glue, $return);
     }
         
     /**

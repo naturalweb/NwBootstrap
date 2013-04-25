@@ -39,7 +39,10 @@ class AlertTest extends TestCase
 	public function testAlertWithMessagesInArray()
 	{
 		$listMessage = array(
-			array('Alguma mensagem de erro!'),
+			array(
+                array('recursiva 1'),
+			    array('recursiva 2'),
+            ),
 		    array('Alguma mensagem de aviso!'),
 		);
 		$html = $this->alert->__invoke($listMessage);
@@ -47,6 +50,7 @@ class AlertTest extends TestCase
 		
 		$this->assertQueryCount('div.alert', 2, 'Deveria exibir dois alert');
 		$this->assertQueryCount('div.alert button.close', 2, 'Button de Close não encontrado');
+		$this->assertQueryContentContains('div.alert p', strip_tags('recursiva 1<br />recursiva 2'));
 	}
 	
 	public function testAlertWithTitleNotClose()
