@@ -42,6 +42,6 @@ class PageHeaderTest extends TestCase
 		$this->assertQueryContentContains('div.page-header h2 small', $subTitulo);
 		
 		$match = strip_tags($titulo.' <small>'.$subTitulo.'</small>');
-		$this->assertXpathQueryContentContains('div.page-header h2', $match);
+		$this->assertQueryContentContains('div.page-header h2', $match);
 	}
 }
