@@ -41,7 +41,23 @@ class PageHeaderTest extends TestCase
 		
 		$this->assertQueryContentContains('div.page-header h2 small', $subTitulo);
 		
-		$match = strip_tags($titulo.' <small>'.$subTitulo.'</small>');
+		$match = "{$titulo} {$subTitulo}";
 		$this->assertQueryContentContains('div.page-header h2', $match);
+	}
+	
+	public function testTituloSubTituloAndExtra()
+	{
+	    $titulo = "AAAAAAAA";
+	    $subTitulo = "BBBBBBBB";
+	    $valorExtra = "valor extra";
+	    $extra = "<div>".$valorExtra."</div>";
+	    $PageHeader=$this->_helper;
+	    $html = $PageHeader($titulo, $subTitulo, $extra);
+	    $this->getApplication()->getResponse()->setContent($html);
+	    
+	    $this->assertQueryContentContains('div.page-header > div', $valorExtra );
+	    
+	    $match = "{$titulo} {$subTitulo}{$valorExtra}";
+	    $this->assertQueryContentContains('div.page-header', $match);
 	}
 }

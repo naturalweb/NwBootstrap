@@ -31,24 +31,24 @@ class PageHeader extends AbstractHtmlElement
      * 
      * @return string
      */
-    public function __invoke($titulo, $sub_titulo = null, $extra = null)
+    public function __invoke($titulo, $subTitulo = null, $extra = null)
     {
-        $return = '';
+        $pageHeader  = "<div class='clearfix page-header'>";
+        $pageHeader .= "<h2>";
+        $pageHeader .= $titulo;
         
-        $return .= '<div class="page-header">';
-        $return .= '<h2>'.$this->view->escapeHtml($titulo);
-        
-        if ($sub_titulo) {
-            $return .= ' <small>'.$this->view->escapeHtml($sub_titulo).'</small>';
+        if (!empty($subTitulo)) {
+            $pageHeader .= " <small>{$subTitulo}</small>";
         }
         
-        if ($extra) {
-            $return .= $extra;
+        $pageHeader .= "</h2>";
+        
+        if (!empty($extra)) {
+            $pageHeader .= $extra;
         }
         
-        $return .= '</h2>';
-        $return .= '</div>';
+        $pageHeader .= "</div>";
         
-        return $return;
+        return $pageHeader;
     }
 }
