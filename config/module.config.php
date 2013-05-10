@@ -10,6 +10,7 @@ return array(
             'bootstrapPageHeader' => 'NwBootstrap\View\Helper\PageHeader',
         	'bootstrapBadges' 	  => 'NwBootstrap\View\Helper\Badges',
         	'bootstrapLabels' 	  => 'NwBootstrap\View\Helper\Labels',
+            'bootstrapIcon' 	  => 'NwBootstrap\View\Helper\Icon',
         ),
     ),
     
