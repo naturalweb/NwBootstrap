@@ -34,12 +34,10 @@ class Icon extends AbstractHtmlElement
         $icon = trim($icon);
         $icon = strtolower($icon);
         
-        $pattern = "/^icon-[a-z]+$/";
-        
-        if (!preg_match($pattern, $icon)) {
-            $icon = '';
+        if (!preg_match("/^icon-[a-z][a-z\-]*$/", $icon)) {
+            return '';
         }
         
-        return sprintf('<i class="icon %s"></i> ', $icon);
+        return sprintf(' <i class="%s"></i> ', $icon);
     }
 }

@@ -10,11 +10,11 @@ class IconTest extends TestCase
 {
 	public function testInvokeHelperIconFormatValid()
 	{
-		$icon = ' ICON-print ';
+		$icon = ' ICON-questioN-sign ';
 	    $helper = new Icon();
 		$return = $helper($icon);
 		
-		$expected = '<i class="icon icon-print"></i> ';
+		$expected = ' <i class="icon-question-sign"></i> ';
 	    $this->assertEquals($expected, $return);
 	}
 	
@@ -23,8 +23,7 @@ class IconTest extends TestCase
 	    $icon = ' ICON- ';
 	    $helper = new Icon();
 	    $return = $helper($icon);
-	
-	    $expected = '<i class="icon "></i> ';
-	    $this->assertEquals($expected, $return);
+	    
+	    $this->assertEmpty($return);
 	}
 }
