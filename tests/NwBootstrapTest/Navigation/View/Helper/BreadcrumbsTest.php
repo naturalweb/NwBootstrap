@@ -45,8 +45,8 @@ class BreadcrumbsTest extends \PHPUnit_Framework_TestCase
         );
         $navigation = new Navigation($default);
         
-        $expected  = '<ul class="breadcrumbs">' . PHP_EOL;
-        $expected .= '<li><a title="TESTE" href="/teste1">Teste1</a></li>' . PHP_EOL;
+        $expected  = '<ul class="breadcrumb">' . PHP_EOL;
+        $expected .= '<li><a title="TESTE" href="/teste1">Teste1</a> / </li>' . PHP_EOL;
         $expected .= '<li>Teste2</li>' . PHP_EOL;
         $expected .= '</ul>' . PHP_EOL;
         

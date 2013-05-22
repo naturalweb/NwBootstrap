@@ -14,6 +14,13 @@ use Zend\View\Exception;
 class Breadcrumbs extends ZendBreadcrumbs
 {
     /**
+     * Breadcrumbs separator string
+     *
+     * @var string
+     */
+    protected $separator = ' / ';
+    
+    /**
      * Renders breadcrumbs by chaining 'a' elements with the separator
      * registered in the helper
      *
@@ -57,7 +64,7 @@ class Breadcrumbs extends ZendBreadcrumbs
         while ($parent = $active->getParent()) {
             if ($parent instanceof AbstractPage) {
                 // prepend crumb to html
-                $html = $this->htmlify($parent);
+                $html = $this->htmlify($parent) . $this->getSeparator();
                 if (!empty($html)) {
                     array_unshift($listPages, $html);
                 }
@@ -72,7 +79,7 @@ class Breadcrumbs extends ZendBreadcrumbs
         }
         
         $ordered = false;
-        $attribs = array('class' => 'breadcrumbs');
+        $attribs = array('class' => 'breadcrumb');
         $escape = false;
         return $this->view->htmlList($listPages, $ordered, $attribs, $escape);
     }
