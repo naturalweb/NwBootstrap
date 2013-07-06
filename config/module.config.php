@@ -6,6 +6,7 @@ return array(
             'bootstrapRow'        => 'NwBootstrap\Form\View\Helper\BootstrapRow',
             'bootstrapCollection' => 'NwBootstrap\Form\View\Helper\BootstrapCollection',
             'bootstrapNavbar'     => 'NwBootstrap\Navigation\View\Helper\Navbar',
+            'bootstrapBreadcrumbs'=> 'NwBootstrap\Navigation\View\Helper\Breadcrumbs',
             'bootstrapAlert'      => 'NwBootstrap\View\Helper\Alert',
             'bootstrapPageHeader' => 'NwBootstrap\View\Helper\PageHeader',
         	'bootstrapBadges' 	  => 'NwBootstrap\View\Helper\Badges',
