@@ -228,7 +228,7 @@ class Navbar extends AbstractHelper
             $element = 'span';
         }
 
-        if ($page->hasChildren()) {
+        if ($page->hasPages()) {
             $attribs['href'] = '#'; // need to hash as now a placeholder
             $attribs['class'] .= ' dropdown-toggle';
             $attribs['data-toggle'] = 'dropdown';
@@ -246,7 +246,7 @@ class Navbar extends AbstractHelper
         } else {
             $html .= $label;
         }
-        if ($page->hasChildren()) {
+        if ($page->hasPages()) {
             $html .= ' <b class="caret"></b>';
         }
         
@@ -469,7 +469,7 @@ class Navbar extends AbstractHelper
             }
 
             // render li tag and page
-            $liClass = $page->hasChildren() ? ' dropdown' : '';
+            $liClass = $page->hasPages() ? ' dropdown' : '';
             $liClass .= $isActive ? ' active' : '';
             $liClass = (strlen($liClass)) ? ' class="' . $liClass . '" ' : '';
             
